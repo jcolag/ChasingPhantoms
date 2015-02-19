@@ -8,10 +8,11 @@ var posY = 0;
 
 var countHit = 0;
 var countMiss = 0;
+var isVisible = false;
 
 var reportScore = function() {
   var score = "" + countHit + " hits<br>" + countMiss + " misses";
-  $("#target").html(score);
+  $("#score").html(score);
 }
 var boxCaught = function() {
   countHit++;

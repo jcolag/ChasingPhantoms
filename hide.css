@@ -4,4 +4,9 @@
   height: 75px;
   width: 75px;
 }
-
+#score {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border: 1px solid black;
+}
