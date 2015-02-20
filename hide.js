@@ -7,19 +7,30 @@ var posX = 0;
 var posY = 0;
 
 var countHit = 0;
-var countMiss = 0;
+var countMiss = -1;
 var isVisible = false;
 
 var reportScore = function() {
+  isVisible = true;
   var score = "" + countHit + " hits<br>" + countMiss + " misses";
   $("#score").html(score);
+  $("#target").fadeTo(500, 1.0, function() {
+    $("#target").fadeTo(500, 0.01, function() {
+      isVisible = false;
+    });
+  });
 }
 var boxCaught = function() {
+  if (isVisible) {
+    return;
+  }
   countHit++;
-  countMiss--;
   reportScore();
 }
 var boxMissed = function() {
+  if (isVisible) {
+    return;
+  }
   countMiss++;
   reportScore();
 }
