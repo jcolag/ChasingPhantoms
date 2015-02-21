@@ -1,3 +1,7 @@
+var scrHeight = 0;
+var scrWidth = 0;
+var radiusMax = 0;
+
 var radius = 275;
 var angle = - Math.PI / 2;
 var tick = 0.01;
@@ -51,5 +55,21 @@ var updateAngle = function(delta) {
 var move = function() {
   updateAngle(tick);
   setPosition();
+}
+
+var setup = function() {
+  var scrWidth = $(window).width();
+  var scrHeight = $(window).height();
+  if (scrWidth > scrHeight) {
+    radiusMax = scrHeight / 2;
+  } else {
+    radiusMax = scrWidth / 2;
+  }
+
+  radius = (scrHeight / 2) - 50;
+  offsetLeft = scrWidth / 2 - radius;
+  offsetTop = scrHeight / 50;
+
+  $("#target").fadeTo(500, 0.01);
 }
 
