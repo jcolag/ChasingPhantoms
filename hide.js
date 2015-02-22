@@ -66,9 +66,10 @@ var setup = function() {
     radiusMax = scrWidth / 2;
   }
 
-  radius = (scrHeight / 2) - 50;
-  offsetLeft = scrWidth / 2 - radius;
-  offsetTop = scrHeight / 50;
+  radius = Math.random() * (radiusMax - 100) + 50;
+  offsetLeft = Math.random() * (scrWidth - radius * 2 - 100);
+  offsetTop = Math.random() * (scrHeight - radius * 2 - 100);
+  tick = Math.floor(Math.random() * 5) / 100 + 0.005;
 
   $("#target").fadeTo(500, 0.01);
 }
