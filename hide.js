@@ -10,6 +10,8 @@ var offsetTop = 10;
 var posX = 0;
 var posY = 0;
 
+var timeout = 15000;
+
 var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
@@ -72,5 +74,6 @@ var setup = function() {
   tick = Math.floor(Math.random() * 5) / 100 + 0.005;
 
   $("#target").fadeTo(500, 0.01);
+  setTimeout(setup, timeout);
 }
 
