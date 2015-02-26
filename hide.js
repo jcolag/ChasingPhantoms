@@ -21,7 +21,7 @@ var reportScore = function() {
   var score = "" + countHit + " hits<br>" + countMiss + " misses";
   $("#score").html(score);
   $("#target").fadeTo(500, 1.0, function() {
-    $("#target").fadeTo(500, 0.01, function() {
+    $("#target").fadeTo(500, 0.0, function() {
       isVisible = false;
     });
   });
