@@ -77,3 +77,11 @@ var setup = function() {
   setTimeout(setup, timeout);
 }
 
+var showAbout = function() {
+  var about = $("#about");
+  about.fadeIn(500);
+  about.load("readme.html");
+}
+var hideAbout = function() {
+  $("#about").fadeOut(500);
+}
