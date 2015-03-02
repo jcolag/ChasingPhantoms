@@ -78,10 +78,12 @@ var setup = function() {
 }
 
 var showAbout = function() {
+  isVisible = true;
   var about = $("#about");
   about.fadeIn(500);
   about.load("readme.html");
 }
 var hideAbout = function() {
   $("#about").fadeOut(500);
+  isVisible = false;
 }
