@@ -10,14 +10,21 @@ var offsetTop = 10;
 var posX = 0;
 var posY = 0;
 
+var clickX = 0;
+var clickY = 0;
+
 var timeout = 15000;
 
 var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
 
-var reportScore = function() {
+var reportScore = function(e) {
   isVisible = true;
+  $("#click").offset({left: e.clientX - clickX - 5, top: e.clientY - clickY - 5});
+  clickX = e.clientX - 5;
+  clickY = e.clientY - 5;
+  $("#click").fadeIn();
   var score = "" + countHit + " hits<br>" + countMiss + " misses";
   $("#score").html(score);
   $("#target").fadeTo(500, 1.0, function() {
@@ -25,20 +32,21 @@ var reportScore = function() {
       isVisible = false;
     });
   });
+  $("#click").fadeOut();
 }
-var boxCaught = function() {
+var boxCaught = function(e) {
   if (isVisible) {
     return;
   }
   countHit++;
-  reportScore();
+  reportScore(e);
 }
-var boxMissed = function() {
+var boxMissed = function(e) {
   if (isVisible) {
     return;
   }
   countMiss++;
-  reportScore();
+  reportScore(e);
 }
 
 var setPosition = function() {

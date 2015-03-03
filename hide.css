@@ -24,3 +24,12 @@
   z-index: 1002;
   overflow: auto;
 }
+#click {
+  display: none;
+  position: absolute;
+  z-index: 1010;
+  border: 1px solid red;
+  background-color: yellow;
+  width: 10px;
+  height: 10px;
+}
