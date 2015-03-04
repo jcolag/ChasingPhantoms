@@ -9,10 +9,13 @@
 </head>
 <body>
   <div id="target" onclick="boxCaught(event);"></div>
-  <div id="score"></div>
   <div id="about" onclick='hideAbout();'></div>
   <div id="click"></div>
-  <button id="showAbout" onclick='showAbout();'>About</button>
+  <div id="controls">
+    <button id="showAbout" onclick='showAbout();'>About</button>
+    <br>
+    <div id="score"></div>
+  </div>
   <script type="text/javascript">
     setup();
     setInterval(move, 10);
