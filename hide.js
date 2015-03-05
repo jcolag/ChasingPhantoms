@@ -21,18 +21,20 @@ var isVisible = false;
 
 var reportScore = function(e) {
   isVisible = true;
-  $("#click").offset({left: e.clientX - clickX - 5, top: e.clientY - clickY - 5});
+  var click = $("#click");
+  var target = $("#target");
+  click.offset({left: e.clientX - clickX - 5, top: e.clientY - clickY - 5});
   clickX = e.clientX - 5;
   clickY = e.clientY - 5;
-  $("#click").fadeIn();
+  click.fadeIn();
   var score = "" + countHit + " hits<br>" + countMiss + " misses";
   $("#score").html(score);
-  $("#target").fadeTo(500, 1.0, function() {
-    $("#target").fadeTo(500, 0.0, function() {
+  target.fadeTo(500, 1.0, function() {
+    target.fadeTo(500, 0.0, function() {
       isVisible = false;
     });
   });
-  $("#click").fadeOut();
+  click.fadeOut();
 }
 var boxCaught = function(e) {
   if (isVisible) {
