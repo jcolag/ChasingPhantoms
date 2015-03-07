@@ -19,6 +19,21 @@ var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
 
+/*******************
+** Click Handlers **
+*******************/
+
+/* reportScore(e)
+**   e - click event
+** Handles common code of both (hit and miss) click-handlers.
+**
+** 1.  Deactivates the click-handlers
+** 2.  Show and hide the click-marker underneath the mouse pointer
+**     and save location
+** 3.  Populate the current score
+** 4.  Show and hide the target
+** 5.  Reactivate the click-handlers
+**/
 var reportScore = function(e) {
   isVisible = true;
   var click = $("#click");
@@ -36,6 +51,11 @@ var reportScore = function(e) {
   });
   click.fadeOut();
 }
+
+/* boxCaught(e)
+**   e - click event
+** Increment successes and report score, but only while clicks are accepted
+**/
 var boxCaught = function(e) {
   if (isVisible) {
     return;
@@ -43,6 +63,11 @@ var boxCaught = function(e) {
   countHit++;
   reportScore(e);
 }
+
+/* boxMissed(e)
+**   e - click event
+** Increment failures and report score, but only while clicks are accepted
+**/
 var boxMissed = function(e) {
   if (isVisible) {
     return;
@@ -51,9 +76,23 @@ var boxMissed = function(e) {
   reportScore(e);
 }
 
+/*************
+** Geometry **
+*************/
+
+/* setPosition()
+** Sets the position of the target box in its orbit
+**/
 var setPosition = function() {
   $("#target").offset({left: posX, top: posY});
 };
+
+/* updateAngle(delta)
+**   delta - change in angle
+** Sets position for the orbiting target at current time
+**
+** Should be obvious, but trigonometric functions use radians
+**/
 var updateAngle = function(delta) {
   angle += delta;
   if (angle >= 2 * Math.PI) {
@@ -64,11 +103,28 @@ var updateAngle = function(delta) {
   posX = radius * cos + radius + offsetLeft;
   posY = radius * sin + radius + offsetTop;
 };
+
+/* move()
+** Update target box's position in orbit
+**/
 var move = function() {
   updateAngle(tick);
   setPosition();
 }
 
+/**************
+** Top Level **
+**************/
+
+/* setup()
+** Determines new orbit
+**
+** 1.  Screen geometry
+** 2.  Radius
+** 3.  Center point
+** 4.  Change in angle each tick
+** 5.  Set reset time
+**/
 var setup = function() {
   var scrWidth = $(window).width();
   var scrHeight = $(window).height();
@@ -87,12 +143,27 @@ var setup = function() {
   setTimeout(setup, timeout);
 }
 
+/**************
+** About Box **
+**************/
+
+/* showAbout()
+** Display the about box
+**
+** Disables click-handlers as well
+**/
 var showAbout = function() {
   isVisible = true;
   var about = $("#about");
   about.fadeIn(500);
   about.load("readme.html");
 }
+
+/* hideAbout()
+** Hide the about box
+**
+** Re-enables click-handlers as well
+**/
 var hideAbout = function() {
   $("#about").fadeOut(500);
   isVisible = false;
