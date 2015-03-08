@@ -1,20 +1,39 @@
+/********************
+** Screen Geometry **
+********************/
 var scrHeight = 0;
 var scrWidth = 0;
 var radiusMax = 0;
 
+/*********************
+** Orbital Geometry **
+*********************/
 var radius = 275;
 var angle = - Math.PI / 2;
 var tick = 0.01;
 var offsetLeft = 300;
 var offsetTop = 10;
+
+/*****************************
+** Current Orbital Position **
+*****************************/
 var posX = 0;
 var posY = 0;
 
+/************************
+** User Click Position **
+************************/
 var clickX = 0;
 var clickY = 0;
 
+/*************************
+** Timer to Reset Orbit **
+*************************/
 var timeout = 15000;
 
+/**********
+** Score **
+**********/
 var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
