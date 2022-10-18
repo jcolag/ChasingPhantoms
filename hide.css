@@ -2,20 +2,6 @@ body {
   background-color: #d5e5ed;
   background-image: url(./woodgrain.png);
 }
-#target {
-  position: absolute;
-  background-color: orange;
-  height: 75px;
-  width: 75px;
-}
-#controls {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-}
-#score {
-  border: 1px solid black;
-}
 #about {
   display: none;
   position: absolute;
@@ -40,3 +26,18 @@ body {
   width: 10px;
   height: 10px;
 }
+#controls {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+#score {
+  border: 1px solid black;
+}
+#target {
+  position: absolute;
+  background-color: orange;
+  height: 75px;
+  width: 75px;
+}
+
