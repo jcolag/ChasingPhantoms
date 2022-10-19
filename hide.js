@@ -1,80 +1,81 @@
-/********************
-** Screen Geometry **
-********************/
+// ******************
+// * Screen Geometry **
+// ******************
 var scrHeight = 0;
 var scrWidth = 0;
 var radiusMax = 0;
 
-/*********************
-** Orbital Geometry **
-*********************/
+// *******************
+// * Orbital Geometry **
+// *******************
 var radius = 275;
-var angle = - Math.PI / 2;
+var angle = -Math.PI / 2;
 var tick = 0.01;
 var offsetLeft = 300;
 var offsetTop = 10;
 
-/*****************************
-** Current Orbital Position **
-*****************************/
+// ***************************
+// * Current Orbital Position **
+// ***************************
 var posX = 0;
 var posY = 0;
 
-/************************
-** User Click Position **
-************************/
+// **********************
+// * User Click Position **
+// **********************
 var clickX = 0;
 var clickY = 0;
 
-/*************************
-** Timer to Reset Orbit **
-*************************/
+// ***********************
+// * Timer to Reset Orbit **
+// ***********************
 var timeout = 15000;
 
-/**********
-** Score **
-**********/
+// ********
+// * Score **
+// ********
 var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
 
-/*******************
-** Click Handlers **
-*******************/
+// *****************
+// * Click Handlers **
+// *****************
 
-/* reportScore(e)
-**   e - click event
-** Handles common code of both (hit and miss) click-handlers.
-**
-** 1.  Deactivates the click-handlers
-** 2.  Show and hide the click-marker underneath the mouse pointer
-**     and save location
-** 3.  Populate the current score
-** 4.  Show and hide the target
-** 5.  Reactivate the click-handlers
-**/
+// reportScore(e)
+// *   e - click event
+// * Handles common code of both (hit and miss) click-handlers.
+// *
+// * 1.  Deactivates the click-handlers
+// * 2.  Show and hide the click-marker underneath the mouse pointer
+// *     and save location
+// * 3.  Populate the current score
+// * 4.  Show and hide the target
+// * 5.  Reactivate the click-handlers
+//
 var reportScore = function(e) {
   isVisible = true;
   var click = $("#click");
   var target = $("#target");
-  click.offset({left: e.clientX - clickX - 5, top: e.clientY - clickY - 5});
+  click.offset({left: e.clientX - clickX - 5,
+top: e.clientY - clickY - 5});
   clickX = e.clientX - 5;
   clickY = e.clientY - 5;
   click.fadeIn();
-  var score = "" + countHit + " hits<br>" + countMiss + " misses";
+  var score = `${String(countHit)} hits<br>${countMiss} misses`;
   $("#score").html(score);
-  target.fadeTo(500, 1.0, function() {
-    target.fadeTo(500, 0.0, function() {
+  target.fadeTo(500, 1.0, () => {
+    target.fadeTo(500, 0.0, () => {
       isVisible = false;
     });
   });
   click.fadeOut();
 }
 
-/* boxCaught(e)
-**   e - click event
-** Increment successes and report score, but only while clicks are accepted
-**/
+// boxCaught(e)
+// *   e - click event
+// * Increment successes and report score, but only while clicks are accepted
+//
 var boxCaught = function(e) {
   if (isVisible) {
     return;
@@ -83,10 +84,10 @@ var boxCaught = function(e) {
   reportScore(e);
 }
 
-/* boxMissed(e)
-**   e - click event
-** Increment failures and report score, but only while clicks are accepted
-**/
+// boxMissed(e)
+// *   e - click event
+// * Increment failures and report score, but only while clicks are accepted
+//
 var boxMissed = function(e) {
   if (isVisible) {
     return;
@@ -95,23 +96,24 @@ var boxMissed = function(e) {
   reportScore(e);
 }
 
-/*************
-** Geometry **
-*************/
+// ***********
+// * Geometry **
+// ***********
 
-/* setPosition()
-** Sets the position of the target box in its orbit
-**/
+// setPosition()
+// * Sets the position of the target box in its orbit
+//
 var setPosition = function() {
-  $("#target").offset({left: posX, top: posY});
+  $("#target").offset({left: posX,
+top: posY});
 };
 
-/* updateAngle(delta)
-**   delta - change in angle
-** Sets position for the orbiting target at current time
-**
-** Should be obvious, but trigonometric functions use radians
-**/
+// updateAngle(delta)
+// *   delta - change in angle
+// * Sets position for the orbiting target at current time
+// *
+// * Should be obvious, but trigonometric functions use radians
+//
 var updateAngle = function(delta) {
   angle += delta;
   if (angle >= 2 * Math.PI) {
@@ -123,27 +125,27 @@ var updateAngle = function(delta) {
   posY = radius * sin + radius + offsetTop;
 };
 
-/* move()
-** Update target box's position in orbit
-**/
+// move()
+// * Update target box's position in orbit
+//
 var move = function() {
   updateAngle(tick);
   setPosition();
 }
 
-/**************
-** Top Level **
-**************/
+// ************
+// * Top Level **
+// ************
 
-/* setup()
-** Determines new orbit
-**
-** 1.  Screen geometry
-** 2.  Radius
-** 3.  Center point
-** 4.  Change in angle each tick
-** 5.  Set reset time
-**/
+// setup()
+// * Determines new orbit
+// *
+// * 1.  Screen geometry
+// * 2.  Radius
+// * 3.  Center point
+// * 4.  Change in angle each tick
+// * 5.  Set reset time
+//
 var setup = function() {
   var scrWidth = $(window).width();
   var scrHeight = $(window).height();
@@ -162,15 +164,15 @@ var setup = function() {
   setTimeout(setup, timeout);
 }
 
-/**************
-** About Box **
-**************/
+// ************
+// * About Box **
+// ************
 
-/* showAbout()
-** Display the about box
-**
-** Disables click-handlers as well
-**/
+// showAbout()
+// * Display the about box
+// *
+// * Disables click-handlers as well
+//
 var showAbout = function() {
   isVisible = true;
   var about = $("#about");
@@ -178,11 +180,11 @@ var showAbout = function() {
   about.load("readme.html");
 }
 
-/* hideAbout()
-** Hide the about box
-**
-** Re-enables click-handlers as well
-**/
+// hideAbout()
+// * Hide the about box
+// *
+// * Re-enables click-handlers as well
+//
 var hideAbout = function() {
   $("#about").fadeOut(500);
   isVisible = false;
