@@ -1,8 +1,6 @@
 // ******************
 // * Screen Geometry **
 // ******************
-var scrHeight = 0;
-var scrWidth = 0;
 var radiusMax = 0;
 
 // *******************
@@ -53,17 +51,19 @@ var isVisible = false;
 // * 4.  Show and hide the target
 // * 5.  Reactivate the click-handlers
 //
-var reportScore = function(e) {
+function reportScore(e) {
   isVisible = true;
-  var click = $("#click");
-  var target = $("#target");
-  click.offset({left: e.clientX - clickX - 5,
-top: e.clientY - clickY - 5});
+  var click = $('#click');
+  var target = $('#target');
+  click.offset({
+    left: e.clientX - clickX - 5,
+    top: e.clientY - clickY - 5,
+  });
   clickX = e.clientX - 5;
   clickY = e.clientY - 5;
   click.fadeIn();
   var score = `${String(countHit)} hits<br>${countMiss} misses`;
-  $("#score").html(score);
+  $('#score').html(score);
   target.fadeTo(500, 1.0, () => {
     target.fadeTo(500, 0.0, () => {
       isVisible = false;
@@ -76,11 +76,12 @@ top: e.clientY - clickY - 5});
 // *   e - click event
 // * Increment successes and report score, but only while clicks are accepted
 //
-var boxCaught = function(e) {
+function boxCaught(e) {
   if (isVisible) {
     return;
   }
-  countHit++;
+
+  countHit += 1;
   reportScore(e);
 }
 
@@ -88,11 +89,12 @@ var boxCaught = function(e) {
 // *   e - click event
 // * Increment failures and report score, but only while clicks are accepted
 //
-var boxMissed = function(e) {
+function boxMissed(e) {
   if (isVisible) {
     return;
   }
-  countMiss++;
+
+  countMiss += 1;
   reportScore(e);
 }
 
@@ -103,10 +105,13 @@ var boxMissed = function(e) {
 // setPosition()
 // * Sets the position of the target box in its orbit
 //
-var setPosition = function() {
-  $("#target").offset({left: posX,
-top: posY});
-};
+function setPosition() {
+  $('#target')
+    .offset({
+      left: posX,
+      top: posY,
+    });
+}
 
 // updateAngle(delta)
 // *   delta - change in angle
@@ -114,7 +119,7 @@ top: posY});
 // *
 // * Should be obvious, but trigonometric functions use radians
 //
-var updateAngle = function(delta) {
+function updateAngle(delta) {
   angle += delta;
   if (angle >= 2 * Math.PI) {
     angle = 0.0;
@@ -123,12 +128,12 @@ var updateAngle = function(delta) {
   var sin = Math.sin(angle);
   posX = radius * cos + radius + offsetLeft;
   posY = radius * sin + radius + offsetTop;
-};
+}
 
 // move()
 // * Update target box's position in orbit
 //
-var move = function() {
+function move() {
   updateAngle(tick);
   setPosition();
 }
@@ -146,7 +151,7 @@ var move = function() {
 // * 4.  Change in angle each tick
 // * 5.  Set reset time
 //
-var setup = function() {
+function setup() {
   var scrWidth = $(window).width();
   var scrHeight = $(window).height();
   if (scrWidth > scrHeight) {
@@ -160,7 +165,7 @@ var setup = function() {
   offsetTop = Math.random() * (scrHeight - radius * 2 - 100);
   tick = Math.floor(Math.random() * 5) / 100 + 0.005;
 
-  $("#target").fadeTo(500, 0.01);
+  $('#target').fadeTo(500, 0.01);
   setTimeout(setup, timeout);
 }
 
@@ -173,11 +178,11 @@ var setup = function() {
 // *
 // * Disables click-handlers as well
 //
-var showAbout = function() {
+function showAbout() {
   isVisible = true;
-  var about = $("#about");
+  var about = $('#about');
   about.fadeIn(500);
-  about.load("readme.html");
+  about.load('readme.html');
 }
 
 // hideAbout()
@@ -185,7 +190,7 @@ var showAbout = function() {
 // *
 // * Re-enables click-handlers as well
 //
-var hideAbout = function() {
-  $("#about").fadeOut(500);
+function hideAbout() {
+  $('#about').fadeOut(500);
   isVisible = false;
 }
