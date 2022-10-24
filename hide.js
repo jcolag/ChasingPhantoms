@@ -1,44 +1,30 @@
-// ******************
-// * Screen Geometry **
-// ******************
+// * Screen Geometry *
 var radiusMax = 0;
 
-// *******************
-// * Orbital Geometry **
-// *******************
+// * Orbital Geometry *
 var radius = 275;
 var angle = -Math.PI / 2;
 var tick = 0.01;
 var offsetLeft = 300;
 var offsetTop = 10;
 
-// ***************************
-// * Current Orbital Position **
-// ***************************
+// * Current Orbital Position *
 var posX = 0;
 var posY = 0;
 
-// **********************
-// * User Click Position **
-// **********************
+// * User Click Position *
 var clickX = 0;
 var clickY = 0;
 
-// ***********************
-// * Timer to Reset Orbit **
-// ***********************
+// * Timer to Reset Orbit *
 var timeout = 15000;
 
-// ********
-// * Score **
-// ********
+// * Score *
 var countHit = 0;
 var countMiss = -1;
 var isVisible = false;
 
-// *****************
-// * Click Handlers **
-// *****************
+// * Click Handlers *
 
 // reportScore(e)
 // *   e - click event
@@ -50,7 +36,6 @@ var isVisible = false;
 // * 3.  Populate the current score
 // * 4.  Show and hide the target
 // * 5.  Reactivate the click-handlers
-//
 function reportScore(e) {
   isVisible = true;
   var click = $('#click');
@@ -75,7 +60,6 @@ function reportScore(e) {
 // boxCaught(e)
 // *   e - click event
 // * Increment successes and report score, but only while clicks are accepted
-//
 function boxCaught(e) {
   if (isVisible) {
     return;
@@ -88,7 +72,6 @@ function boxCaught(e) {
 // boxMissed(e)
 // *   e - click event
 // * Increment failures and report score, but only while clicks are accepted
-//
 function boxMissed(e) {
   if (isVisible) {
     return;
@@ -98,13 +81,10 @@ function boxMissed(e) {
   reportScore(e);
 }
 
-// ***********
-// * Geometry **
-// ***********
+// * Geometry *
 
 // setPosition()
 // * Sets the position of the target box in its orbit
-//
 function setPosition() {
   $('#target')
     .offset({
@@ -118,7 +98,6 @@ function setPosition() {
 // * Sets position for the orbiting target at current time
 // *
 // * Should be obvious, but trigonometric functions use radians
-//
 function updateAngle(delta) {
   angle += delta;
   if (angle >= 2 * Math.PI) {
@@ -132,15 +111,12 @@ function updateAngle(delta) {
 
 // move()
 // * Update target box's position in orbit
-//
 function move() {
   updateAngle(tick);
   setPosition();
 }
 
-// ************
-// * Top Level **
-// ************
+// * Top Level *
 
 // setup()
 // * Determines new orbit
@@ -150,7 +126,6 @@ function move() {
 // * 3.  Center point
 // * 4.  Change in angle each tick
 // * 5.  Set reset time
-//
 function setup() {
   var scrWidth = $(window).width();
   var scrHeight = $(window).height();
@@ -169,15 +144,12 @@ function setup() {
   setTimeout(setup, timeout);
 }
 
-// ************
-// * About Box **
-// ************
+// * About Box *
 
 // showAbout()
 // * Display the about box
 // *
 // * Disables click-handlers as well
-//
 function showAbout() {
   isVisible = true;
   var about = $('#about');
@@ -189,7 +161,6 @@ function showAbout() {
 // * Hide the about box
 // *
 // * Re-enables click-handlers as well
-//
 function hideAbout() {
   $('#about').fadeOut(500);
   isVisible = false;
