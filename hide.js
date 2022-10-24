@@ -1,28 +1,28 @@
 // * Screen Geometry *
-var radiusMax = 0;
+let radiusMax = 0;
 
 // * Orbital Geometry *
-var radius = 275;
-var angle = -Math.PI / 2;
-var tick = 0.01;
-var offsetLeft = 300;
-var offsetTop = 10;
+let radius = 275;
+let angle = -Math.PI / 2;
+let tick = 0.01;
+let offsetLeft = 300;
+let offsetTop = 10;
 
 // * Current Orbital Position *
-var posX = 0;
-var posY = 0;
+let posX = 0;
+let posY = 0;
 
 // * User Click Position *
-var clickX = 0;
-var clickY = 0;
+let clickX = 0;
+let clickY = 0;
 
 // * Timer to Reset Orbit *
-var timeout = 15000;
+const timeout = 15000;
 
 // * Score *
-var countHit = 0;
-var countMiss = -1;
-var isVisible = false;
+let countHit = 0;
+let countMiss = -1;
+let isVisible = false;
 
 // * Click Handlers *
 
@@ -37,9 +37,10 @@ var isVisible = false;
 // * 4.  Show and hide the target
 // * 5.  Reactivate the click-handlers
 function reportScore(e) {
+  const click = $('#click');
+  const target = $('#target');
+
   isVisible = true;
-  var click = $('#click');
-  var target = $('#target');
   click.offset({
     left: e.clientX - clickX - 5,
     top: e.clientY - clickY - 5,
@@ -47,8 +48,10 @@ function reportScore(e) {
   clickX = e.clientX - 5;
   clickY = e.clientY - 5;
   click.fadeIn();
-  var score = `${String(countHit)} hits<br>${countMiss} misses`;
-  $('#score').html(score);
+
+  const score = `${String(countHit)} hits<br>${countMiss} misses`;
+
+  document.getElementById('score').innerHTML = score;
   target.fadeTo(500, 1.0, () => {
     target.fadeTo(500, 0.0, () => {
       isVisible = false;
@@ -103,8 +106,10 @@ function updateAngle(delta) {
   if (angle >= 2 * Math.PI) {
     angle = 0.0;
   }
-  var cos = Math.cos(angle);
-  var sin = Math.sin(angle);
+
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+
   posX = radius * cos + radius + offsetLeft;
   posY = radius * sin + radius + offsetTop;
 }
@@ -127,8 +132,9 @@ function move() {
 // * 4.  Change in angle each tick
 // * 5.  Set reset time
 function setup() {
-  var scrWidth = $(window).width();
-  var scrHeight = $(window).height();
+  const scrWidth = $(window).width();
+  const scrHeight = $(window).height();
+
   if (scrWidth > scrHeight) {
     radiusMax = scrHeight / 2;
   } else {
@@ -151,8 +157,9 @@ function setup() {
 // *
 // * Disables click-handlers as well
 function showAbout() {
+  const about = $('#about');
+
   isVisible = true;
-  var about = $('#about');
   about.fadeIn(500);
   about.load('readme.html');
 }
