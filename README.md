@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 John Colagioia <john@colagioia.net>
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 # ChasingPhantoms
 _Chasing Phantoms_ is a mildly-entertaining HTML/Javascript game.  The goal of simplicity was more important than how fun it is, so bear that in mind, here...
 

@@ -1,2 +1,7 @@
 #!/bin/sh
+
+# SPDX-FileCopyrightText: 2021 John Colagioia <john@colagioia.net>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 pandoc -f markdown -i README.md -t html -o readme.html
